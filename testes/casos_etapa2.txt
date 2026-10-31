@@ -1,0 +1,149 @@
+# Casos de teste - Etapa 2 (Par de Pontos Mais Proximos)
+#
+# Formato de cada caso:
+#   ### nome_do_caso
+#   # porque: justificativa
+#   entrada:
+#   n e depois n linhas "x y"
+#   saida:
+#   distancia i j        (6 casas decimais; indices comecando em 0; i < j)
+#
+# Quando mais de um par tem a mesma distancia minima (empate), o teste
+# confere so a distancia e se o par devolvido realmente tem essa distancia.
+
+### dois_pontos
+# porque: menor entrada possivel (n = 2); so existe um par.
+entrada:
+2
+0 0
+3 4
+saida:
+5.000000 0 1
+
+### tres_pontos
+# porque: n = 3 cai direto no caso base (forca bruta) da divisao e conquista.
+entrada:
+3
+0 0
+10 10
+1 1
+saida:
+1.414214 0 2
+
+### pontos_repetidos
+# porque: duas estacoes no mesmo lugar -> distancia 0. A faixa fica vazia (delta = 0) e nao pode quebrar.
+entrada:
+4
+1 1
+5 5
+1 1
+9 9
+saida:
+0.000000 0 2
+
+### par_cruza_a_linha
+# porque: o par mais proximo tem um ponto de cada lado da mediana; so a etapa da faixa encontra.
+entrada:
+8
+0 0
+0 20
+3 5
+0 40
+4 5
+7 0
+7 20
+7 40
+saida:
+1.000000 2 4
+
+### colineares_horizontal
+# porque: todos com o mesmo y; empate entre (0,2) e (1,3) com distancia 3.
+entrada:
+5
+0 0
+10 0
+3 0
+7 0
+20 0
+saida:
+3.000000 0 2
+
+### colineares_mesmo_x
+# porque: todos com o mesmo x. A linha divisoria passa em cima de todos os pontos e a faixa contem todos;
+# testa se a comparacao com 7 vizinhos por y ainda funciona.
+entrada:
+6
+5 0
+5 9
+5 4
+5 15
+5 20
+5 2
+saida:
+2.000000 0 5
+
+### coordenadas_negativas_e_decimais
+# porque: a entrada pode ter coordenadas negativas e nao inteiras.
+entrada:
+4
+-1.5 -2.5
+2 3
+-1 -2
+10 -10
+saida:
+0.707107 0 2
+
+### grade_3x3
+# porque: muitos empates (12 pares com distancia 1) e muitos pontos alinhados na faixa.
+entrada:
+9
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+2 0
+2 1
+2 2
+saida:
+1.000000 0 1
+
+### quadrado_com_centro
+# porque: o ponto do centro esta em cima da linha divisoria; distancia minima e a diagonal ate ele.
+entrada:
+5
+0 0
+2 0
+0 2
+2 2
+1 1
+saida:
+1.414214 0 4
+
+### ja_ordenado_por_x
+# porque: entrada ja ordenada por x; o quick sort sem pivo aleatorio cairia no pior caso.
+entrada:
+10
+0 100
+1 50
+2 0
+3 70
+4 30
+5 90
+6 10
+7 60
+8 20
+9 85
+saida:
+6.403124 5 9
+
+### pontos_distantes
+# porque: coordenadas grandes; distancia nao pode perder precisao.
+entrada:
+3
+1000000 1000000
+-1000000 -1000000
+1000003 1000004
+saida:
+5.000000 0 2

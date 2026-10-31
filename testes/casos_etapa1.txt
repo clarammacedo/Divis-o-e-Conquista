@@ -1,0 +1,150 @@
+# Casos de teste - Etapa 1 (Subarranjo de Soma Maxima)
+#
+# Formato de cada caso:
+#   ### nome_do_caso
+#   # porque: justificativa do caso
+#   entrada:
+#   (n e os n numeros, exatamente como o programa le da entrada padrao)
+#   saida:
+#   soma inicio fim      (indices comecando em 0)
+#
+# Regra de desempate: maior soma; empate -> menor inicio; empate -> menor fim.
+
+### tamanho_1_positivo
+# porque: caso de borda pedido (n = 1). O caso base da recursao tem que funcionar sozinho.
+entrada:
+1
+5
+saida:
+5 0 0
+
+### tamanho_1_negativo
+# porque: n = 1 com valor negativo; a resposta nao pode ser 0 (o intervalo nao pode ser vazio).
+entrada:
+1
+-7
+saida:
+-7 0 0
+
+### tamanho_2
+# porque: menor caso que divide em duas metades; o maximo esta so na metade direita.
+entrada:
+2
+-1 2
+saida:
+2 1 1
+
+### todos_negativos
+# porque: caso de borda pedido. A resposta e o maior elemento sozinho, e nao 0 (erro comum de Kadane).
+entrada:
+5
+-8 -3 -6 -2 -5
+saida:
+-2 3 3
+
+### todos_negativos_com_empate
+# porque: so negativos E dois maximos iguais (-1 nas posicoes 1 e 3); vale o de menor inicio.
+entrada:
+4
+-4 -1 -9 -1
+saida:
+-1 1 1
+
+### todos_positivos
+# porque: o melhor intervalo e o vetor inteiro; testa se o cruzamento pega as duas pontas.
+entrada:
+5
+1 2 3 4 5
+saida:
+15 0 4
+
+### exemplo_classico_acoes
+# porque: exemplo do livro (variacao diaria de uma acao); resposta conhecida: soma 43 do dia 7 ao 10.
+entrada:
+16
+13 -3 -25 20 -3 -16 -23 18 20 -7 12 -5 -22 15 -4 7
+saida:
+43 7 10
+
+### empate_intervalos_separados
+# porque: caso de borda pedido (empate). Tres intervalos com soma 3: [0,0], [2,2] e [4,5]; vale o primeiro.
+entrada:
+7
+3 -5 3 -10 2 1 -20
+saida:
+3 0 0
+
+### empate_mesmo_inicio
+# porque: empate entre [0,0] e [0,2] (ambos somam 2) com o mesmo inicio; vale o mais curto.
+entrada:
+4
+2 -1 1 -5
+saida:
+2 0 0
+
+### empate_com_zeros_nas_pontas
+# porque: zeros nao mudam a soma, entao [0,2], [0,4], [2,2], [1,3]... empatam; vale inicio 0 e fim 2.
+entrada:
+5
+0 0 4 0 0
+saida:
+4 0 2
+
+### so_zeros
+# porque: tudo empata com soma 0; a resposta tem que ser o primeiro elemento sozinho.
+entrada:
+3
+0 0 0
+saida:
+0 0 0
+
+### zero_no_meio_de_negativos
+# porque: o maximo e 0 (nao negativo), mas os outros sao todos negativos.
+entrada:
+4
+-3 0 -1 -2
+saida:
+0 1 1
+
+### maximo_cruzando_o_meio
+# porque: o melhor intervalo [2,3] atravessa exatamente o ponto de divisao; testa a funcao de cruzamento.
+entrada:
+6
+-1 -2 5 6 -3 -4
+saida:
+11 2 3
+
+### maximo_no_final
+# porque: o melhor intervalo encosta no ultimo indice.
+entrada:
+6
+-5 -1 -2 1 2 3
+saida:
+6 3 5
+
+### maximo_no_inicio
+# porque: o melhor intervalo encosta no indice 0.
+entrada:
+5
+4 3 -10 1 1
+saida:
+7 0 1
+
+### valores_grandes
+# porque: somas maiores que 32 bits (em C/Java daria overflow; em Python deve funcionar).
+entrada:
+3
+1000000000 -1 1000000000
+saida:
+1999999999 0 2
+
+### entrada_em_varias_linhas
+# porque: o programa deve ler os numeros mesmo se vierem quebrados em linhas diferentes.
+entrada:
+4
+1
+-2
+3
+4
+saida:
+7 2 3
