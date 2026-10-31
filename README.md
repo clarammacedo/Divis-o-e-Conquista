@@ -72,10 +72,11 @@ Roda os casos dos arquivos `casos_etapa*.txt` chamando os programas pela linha d
 ### Experimentos e gráficos
 
 ```
-pip install matplotlib
+pip install -r requirements.txt
 python experimentos/experimento_limiar.py   # ~1 min
 python experimentos/experimentos.py         # ~30 s
 python experimentos/graficos.py
+python relatorio/gerar_relatorio.py         # gera relatorio/relatorio.pdf
 ```
 
 ## Máquina usada nas medições

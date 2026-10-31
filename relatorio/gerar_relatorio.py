@@ -17,7 +17,8 @@ from reportlab.platypus import (Image, KeepTogether, Paragraph, Preformatted,
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 RES = os.path.join(RAIZ, "resultados")
 
-F = "/usr/share/fonts/truetype/dejavu/"
+# fontes DejaVu (licenca livre) dentro do projeto, para funcionar em Windows, Mac ou Linux
+F = os.path.join(RAIZ, "relatorio", "fontes") + os.sep
 pdfmetrics.registerFont(TTFont("Serif", F + "DejaVuSerif.ttf"))
 pdfmetrics.registerFont(TTFont("Serif-B", F + "DejaVuSerif-Bold.ttf"))
 pdfmetrics.registerFont(TTFont("Serif-I", F + "DejaVuSerif-Italic.ttf"))
